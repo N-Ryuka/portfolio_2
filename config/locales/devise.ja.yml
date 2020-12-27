@@ -1,0 +1,14 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        birthday: "生年月日"
+        nickname: "ニックネーム"
+        email: Eメール
+        password: パスワード
+      
+      errors:
+        format: "%{attribute}%{message}"
+        messages:
+          accepted: を受諾してください
+          blank: を入力してください
