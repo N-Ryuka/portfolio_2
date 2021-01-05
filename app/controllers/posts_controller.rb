@@ -1,6 +1,24 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!, except: [:show, :index]
+  before_action :set_post, only: [:edit, :update, :show, :delete]
+
   def index
     @posts = Post.all
+  end
+
+  def new
+    @post = Post.new
+  end
+
+  def edit
+  end
+
+  def update
+    if @post.update(post_params)
+      redirect_to root_path
+    else
+      render :edit
+    end
   end
 
   def create
@@ -13,13 +31,26 @@ class PostsController < ApplicationController
     end
   end
 
+  def show
+  end
+
   def new
     @post = Post.new
     @posts = Post.all
   end
 
-  private
-  def post_params
-    params.require(:post).permit(:title, :body, :category_id)
+  def destroy
+    @post.destroy
+    redirect_to root_path, notice: '投稿を削除しました'
   end
+
+  private
+
+    def set_post
+      @post = Post.find(params[:id])
+    end
+
+    def post_params
+      params.require(:post).permit(:title, :cdategory, :body, :category_id)
+    end
 end

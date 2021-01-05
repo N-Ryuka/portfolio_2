@@ -1,19 +1,20 @@
-<br>
-<br>
 <% @posts.each do |post| %>
 <div class="row">
     <div class="col-md-8 offset-2">
         <div class="card text-center">
             <div class="card-header">
-                <%= post.title %>
+                <%= post.user.username %>
             </div>
             <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">詳細へ</a>
+                <span>タイトル</span>
+                <h5 class="card-title"><%= post.title %></h5>
+                <hr>
+                <span>コンテント</span>
+                <p class="card-text"><%= post.body %></p>
+                <%= link_to '詳細', post_path(post), class: "btn btn-primary" %>
             </div>
             <div class="card-footer text-muted">
-                <%= post.created_at %>
+                <%= post.created_at.to_s(:datetime_jp) %>に投稿されました
             </div>
         </div>
         <br>
