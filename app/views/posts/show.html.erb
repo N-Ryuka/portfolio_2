@@ -17,5 +17,22 @@
                 <%= @post.created_at.to_s(:datetime_jp) %>に投稿されました
             </div>
         </div>
+        <br>
+        <div class="p-comment__list">
+            <div class="p-comment_listTitle">コメント<div>
+            <% @post.comments.each do |comment| %>
+            <div class="p-comment__item">
+                <p><%= simple_format(comment.content) %></p>
+                <div class="p-comment__bottomLine">
+                    <span><%= comment.user.username %></span>
+                    <span><%= comment.created_at.to_s(:datetime_jp) %></span>
+                    <% if user_signed_in? && current_user.id == comment.user.id %>
+                        <span><%= link_to '削除', post_comment_path(comment.post.id, comment.id), method: :delete %></span>
+                    <% end %>
+                </div>
+            </div>
+        <% end %>
+        </div>
+        <%= render partial: 'shared/comment_form', local: { comment: @comment } %>
     </div>
 </div> 

@@ -25,13 +25,15 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
-      redirect_to new_post_path
+      redirect_back(fallback_location: root_path)
     else
-      render :new
+      redirect_back(fallback_location: root_path)
     end
   end
 
   def show
+    @comment = Comment.new(post_id: @post.id)
+    @comments = @post.comments
   end
 
   def new
