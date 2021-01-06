@@ -1,5 +1,8 @@
 @import "bootstrap";
 @import "comments";
+@import "likes";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 
 .container-login {
     @extend .container-fluid;

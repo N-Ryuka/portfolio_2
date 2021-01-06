@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
-  before_action :set_post, only: [:edit, :update, :show, :delete]
+  before_action :set_post, only: [:edit, :update, :show, :destroy]
 
   def index
     @posts = Post.all
@@ -25,7 +25,8 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
-      redirect_back(fallback_location: root_path)
+      flash[:notice] = '投稿しました'
+      redirect_to posts_path
     else
       redirect_back(fallback_location: root_path)
     end
