@@ -11,13 +11,15 @@
                 <hr>
                 <span>コンテント</span>
                 <p class="card-text"><%= post.body %></p>
-                <% if current_user.already_liked?(post) %>
-                    <%= link_to post_like_path(post, id: post.id), method: :delete do %>
-                        <i class="fa fa-heart fa-2x" aria-hidden="true"></i>
-                    <% end %>
-                <% else %>
-                    <%= link_to post_likes_path(post), method: :post do %>
-                        <i class="fa fa-heart-o fa-2x" aria-hidden="true"></i>
+                <% if current_user %>
+                    <% if current_user.already_liked?(post) %>
+                        <%= link_to post_like_path(post, id: post.id), method: :delete do %>
+                            <i class="fa fa-heart fa-2x" aria-hidden="true"></i>
+                        <% end %>
+                    <% else %>
+                        <%= link_to post_likes_path(post), method: :post do %>
+                            <i class="fa fa-heart-o fa-2x" aria-hidden="true"></i>
+                        <% end %>
                     <% end %>
                 <% end %>
                 <%= post.likes.count %>
@@ -32,3 +34,4 @@
     </div>
 </div>
 <% end %>
+<%= paginate @posts %>
