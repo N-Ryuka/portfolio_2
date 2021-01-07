@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
 
+  mount_uploader :image, ImageUploader
+
   def already_liked?(post)
     self.likes.exists?(post_id: post.id)
   end

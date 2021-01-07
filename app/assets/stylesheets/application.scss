@@ -34,3 +34,13 @@
 .pagination>li>a:hover {        
     border-radius: 15px;
 }
+
+.icon_image {
+    width: 45px;
+    height: 45px;
+    //サイズ指定
+    border-radius: 100px;
+    //画像を丸くする
+    object-fit: cover;
+    //タテヨコ比を変えないままトリミング
+}

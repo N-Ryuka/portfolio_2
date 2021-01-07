@@ -3,6 +3,11 @@
     <div class="col-md-8 offset-2">
         <div class="card text-center">
             <div class="card-header">
+                <% if post.user.image? %>
+                    <img src=<%= post.user.image %> class = "icon_image" alt="ユーザーアイコン">
+                <% else %>
+                    <img src="/assets/default.png" class="icon_image" alt="ユーザーアイコン" %>
+                <% end %>
                 <%= post.user.username %>
             </div>
             <div class="card-body">
