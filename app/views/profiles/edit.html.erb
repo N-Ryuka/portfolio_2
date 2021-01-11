@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-md-8 offset-2">
+    <%= form_with model: @profile, method: :get, local: true do |f| %>
+      
+        <div class="form-group">
+            <%= f.label :lastname, "姓" %>
+            <%= f.text_field :lastname, class: "form-control", id: "lastname", placeholder: "姓", maxlength: "20" %>
+        </div>   
+        <div class="form-group">
+            <%= f.label :firstname, "名" %>
+            <%= f.text_field :firstname, class: "form-control", id: "firstname", placeholder: "名", maxlength: "20" %>
+        </div>
+
+       <div class="form-group">
+            <%= f.label :intro, "自己紹介" %>
+            <%= f.text_area :intro, class: "form-control", id: "intro", placeholder: "自己紹介（80文字まで）", maxlength: "80", size: "30x10" %>
+       </div>
+
+        <div class="form-group">
+            <span>プロフィール画像</span>
+            <%= f.file_field :image, class: 'form-control', id:"profile-image" %>
+        </div>
+      
+        <div class="form-group">
+            <%= f.submit "プロフィールを編集する", class: "btn btn-primary btn-block" %>
+        </div>
+    <% end %>
+    </div>
+<div>

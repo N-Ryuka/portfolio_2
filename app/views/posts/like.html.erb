@@ -1,0 +1,7 @@
+<h2>いいねしたユーザー</h2>
+<hr>
+<% @post.liked_users.each do |user| %>
+    <a href="/users/<%= @post.user.id %>"><%= @post.user.username %></a>
+    <hr>
+<% end %>
+

@@ -3,6 +3,7 @@ class Post < ApplicationRecord
   belongs_to :categories, dependent: :destroy, optional: true
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :liked_users, through: :likes, source: :user
 
   validates :title, presence: true, length: { maximum: 20 }
   validates :category_id, presence: true

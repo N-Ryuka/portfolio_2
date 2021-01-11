@@ -6,6 +6,10 @@ class UsersController < ApplicationController
     redirect_to user_path(current_user)
   end
 
+  def index
+    @users = User.all
+  end
+
   def show
   end
 

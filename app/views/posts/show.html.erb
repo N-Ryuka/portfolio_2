@@ -28,7 +28,12 @@
                         <% end %>
                     <% end %>
                 <% end %>
-                <%= @post.likes.count %>
+                <%= @post.likes.count %></a>
+                <br>
+                <br>
+                <%= link_to 'Likeしたユーザーを見る', "/posts/like/#{@post.id}" %>
+                <br>
+
             </div>
             <div class="card-footer text-muted">
                 <%= @post.created_at.to_s(:datetime_jp) %>に投稿されました

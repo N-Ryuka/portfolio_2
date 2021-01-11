@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
-  before_action :set_post, only: [:edit, :update, :show, :destroy]
+  before_action :set_post, only: [:edit, :update, :show, :destroy, :like]
 
   def index
     @posts = Post.page(params[:page]).per(10)
@@ -35,6 +35,7 @@ class PostsController < ApplicationController
   def show
     @comment = Comment.new(post_id: @post.id)
     @comments = @post.comments
+    @like_count = Like.where(post_id: @post.id).count
   end
 
   def new
@@ -45,6 +46,15 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     redirect_to root_path, notice: '投稿を削除しました'
+  end
+
+  def like
+    @liked_post = Post.find(params[:id])
+    @users = @liked_post.liked_users.order('likes.created_at DESC').page(params[:page])
+    if user_signed_in?
+      @user = current_user
+      @my_posts = Post.where(user_id: current_user.id).order('created_at DESC')
+    end
   end
 
   private
