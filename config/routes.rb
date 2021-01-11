@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   devise_for :users, controllers: {
     registrations: 'devise/registrations',
     sessions:      'devise/sessions',
@@ -12,6 +11,7 @@ Rails.application.routes.draw do
   end
   resources :users, only: [:index, :show]
   resources :categories, except: [:new, :show]
+  resources :tags, except: [:new, :show]
 
   get '/posts/like/:id', to: "posts#like"
   get '/mypage', to: 'users#mypage'

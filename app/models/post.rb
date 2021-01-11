@@ -4,9 +4,10 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :liked_users, through: :likes, source: :user
+  has_many :post_tag_relations
+  has_many :tags, through: :post_tag_relations
 
   validates :title, presence: true, length: { maximum: 20 }
-  validates :category_id, presence: true
   validates :body, presence: true, length: { maximum: 1000 }
 
   def liked_by?(user)

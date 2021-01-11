@@ -3,11 +3,8 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:edit, :update, :show, :destroy, :like]
 
   def index
-    @posts = Post.page(params[:page]).per(10)
-  end
-
-  def new
-    @post = Post.new
+    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
+    @posts = @posts.page(params[:page]).per(10)
   end
 
   def edit
@@ -21,6 +18,13 @@ class PostsController < ApplicationController
     end
   end
 
+  def new
+    @post = Post.new
+    @tags = Tag.all
+  end
+
+  # @posts = Post.all
+
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
@@ -28,6 +32,7 @@ class PostsController < ApplicationController
       flash[:notice] = '投稿しました'
       redirect_to posts_path
     else
+      flash[:notice] = '投稿できませんでした'
       redirect_back(fallback_location: root_path)
     end
   end
@@ -38,10 +43,6 @@ class PostsController < ApplicationController
     @like_count = Like.where(post_id: @post.id).count
   end
 
-  def new
-    @post = Post.new
-    @posts = Post.all
-  end
 
   def destroy
     @post.destroy
@@ -64,6 +65,6 @@ class PostsController < ApplicationController
     end
 
     def post_params
-      params.require(:post).permit(:title, :cdategory, :body, :category_id)
+      params.require(:post).permit(:title, :category_id, :body, tag_ids: [])
     end
 end

@@ -10,3 +10,12 @@
     object-fit: cover;
     //タテヨコ比を変えないままトリミング
   }
+
+.posts__searchForm {
+  display: inline-block;
+}
+  
+.posts__select {
+  display: inline-block;
+  width: auto;
+}
