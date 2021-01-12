@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:edit, :update, :show, :destroy, :like]
 
   def index
-    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
+    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all.order(created_at: :desc)
     @posts = @posts.page(params[:page]).per(10)
   end
 
