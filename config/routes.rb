@@ -12,8 +12,11 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show]
   resources :categories, except: [:new, :show]
   resources :tags, except: [:new, :show]
+  resources :relationships, only: [:create, :destroy]
 
   get '/posts/like/:id', to: "posts#like"
   get '/mypage', to: 'users#mypage'
+  get '/follows/user/:id', to: "users#follow"
+  get '/followers/user/:id', to: "users#follower"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

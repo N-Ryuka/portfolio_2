@@ -16,9 +16,9 @@
         <div class="card text-center">
             <div class="card-header">
                 <% if post.user.image? %>
-                    <img src=<%= post.user.image %> class = "icon_image" alt="ユーザーアイコン">
+                    <a href="/users/<%= post.user.id %>"><img src=<%= post.user.image %> class = "icon_image" alt="ユーザーアイコン"></a>
                 <% else %>
-                    <img src="/assets/default.png" class="icon_image" alt="ユーザーアイコン" %>
+                    <a href="/users/<%= post.user.id %>"><img src="/assets/default.png" class="icon_image" alt="ユーザーアイコン" %></a>
                 <% end %>
                 <%= post.user.username %>
                 <br>

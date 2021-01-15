@@ -4,9 +4,9 @@
         <div class="card text-center">
             <div class="card-header">
                 <% if @post.user.image? %>
-                    <img src=<%= @post.user.image %> class = "icon_image" alt="ユーザーアイコン">
+                    <a href="/users/<%= @post.user.id %>"><img src=<%= @post.user.image %> class = "icon_image" alt="ユーザーアイコン"></a>
                 <% else %>
-                    <img src="/assets/default.png" class="icon_image" alt="ユーザーアイコン" %>
+                    <a href="/users/<%= @post.user.id %>"><img src="/assets/default.png" class="icon_image" alt="ユーザーアイコン" %></a>
                 <% end %>
                 <%= @post.user.username %>
                 <% @post.tags.each do |tag| %>
@@ -14,8 +14,9 @@
                 <% end %>
             </div>
             <div class="card-body">
+
                 <h5 class="card-title"><%= @post.title %></h5>
-                <p class="card-text"><%= @post.body %></p>
+                <p class="card-text"><%= simple_format @post.body %></p>
                 <% if user_signed_in? && current_user.id == @post.user.id %>
                     <%= link_to '編集', edit_post_path(@post.id), class: 'btn btn-primary' %>
                     <%= link_to '削除', post_path(@post.id), class: 'btn btn-primary', method: :delete, data:{ confirm: 'Are you sure?' } %>

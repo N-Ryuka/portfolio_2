@@ -1,0 +1,21 @@
+<% if @follow_user.image? %>
+    <a href="/users/<%= @follow_user.id %>"><img src=<%= @follow_user.image %> class = "icon_image" alt="ユーザーアイコン"></a>
+<% else %>
+    <a href="/users/<%= @follow_user.id %>"><img src="/assets/default.png" class="icon_image" alt="ユーザーアイコン" %></a>
+<% end %>
+<div class="justify-content">
+    <p><%= @follow_user.username %>'s Follow</p>
+</div>
+
+<% @users.each do |user| %>
+<div class="card">
+    <div class="card-body">
+        <% if user.image? %>
+            <a href="/users/<%= user.id %>"><img src=<%= user.image %> class = "icon_image" alt="ユーザーアイコン"></a>
+        <% else %>
+            <a href="/users/<%= user.id %>"><img src="/assets/default.png" class="icon_image" alt="ユーザーアイコン" %></a>
+        <% end %>
+        <%= user.username %>
+    </div>
+</div>
+<% end %>
