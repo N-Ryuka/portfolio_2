@@ -1,30 +1,56 @@
 <div class="row">
   <div class="col-md-6 offset-3">
-    <h1>ユーザー詳細ページ</h1>
-    <% if @user.id == current_user.id %>
-    <%= link_to '編集する', edit_user_registration_path(current_user) %>
+    <h1 class="text-center">ユーザー詳細ページ</h1>
+    <% if @user.image? %>
+      <div class="image-size">
+        <img src=<%= @user.image %> class = "icon_image2" alt="ユーザーアイコン">
+        <p><%= @user.username %></p>
+      </div>
+    <% else %>
+      <div class="image-size">
+        <img src="/assets/default.png" class="icon_image2" alt="ユーザーアイコン" %>
+        <p><%= @user.username %></p>
+      </div>
+    <% end %>
+
+    <% if current_user %>
+      <% if @user.id == current_user.id %>
+        <div class="btn-group shadow-0 btn-block" role="group" aria-label="Basic example">
+          <a href="/followers/user/<%= @user.id %>", class="btn btn-outline-dark" >FOLLOWER</a>
+          <a href="/follows/user/<%= @user.id %>", class="btn btn-outline-dark" >FOLLOW</a>
+          <a href="/users/<%= @user.id %>/likes", class="btn btn-outline-dark">いいねしている投稿</a>
+          <%= link_to 'プロフィールを編集', edit_user_registration_path(current_user), class: "btn btn-outline-dark" %>
+        </div>
+      <% else %>
+        <div class="btn-group shadow-0 btn-block" role="group" aria-label="Basic example">
+          <a href="/followers/user/<%= @user.id %>", class="btn btn-outline-dark" >FOLLOWER</a>
+          <a href="/follows/user/<%= @user.id %>", class="btn btn-outline-dark" >FOLLOW</a>
+          <a href="/users/<%= @user.id %>/likes", class="btn btn-outline-dark">いいねしている投稿</a>
+        </div>
+      <% end %>
     <% end %>
     <br>
-    <a href="/follows/user/<%= @user.id %>">follow</a> |
-    <a href="/followers/user/<%= @user.id %>">follower</a>
+
+    <br>
+
     <%# フォローボタン %>
     <%= render "relationships/follow_button", user: @user %>
-    <h3><%= @user.username %></h3>
-    <h2>投稿内容</h2>
-    <% @user.posts.each do |post| %>
-      <a href="/posts/<%= post.id %>"><%= post.title %></a>
-      <hr>
+    <div class="text-center">
+      <h2>投稿内容</h2>
+    </div>
+
+    <% @user.posts.each.with_index do |post, i| %>
+        <a href="/posts/<%= post.id %>"><%= post.title %></a>
+        <p class="text-center"><%= post.created_at.to_s(:datetime_jp) %>に投稿</p>
+        <hr>
     <% end %>
-    <h3>いいねしている投稿</h3>
-    <% @user.liked_posts.each do |post| %>
-      <%= post.user.username %>: 
-      <a href="/posts/<%= post.id %>"><%= post.title %></a>
-      <hr>
-    <% end %>
-    <%= link_to "ユーザー一覧へ", users_path, class: 'btn btn-secondary btn-block' %>
-    <hr>
     <%= link_to "ホームへ戻る", posts_path, class: 'btn btn-info btn-block' %>
+    <hr>
+    <%= link_to 'ユーザー一覧', users_path, class: "btn btn-primary btn-block" %>
+    <% if @user == current_user %>
+      <hr>
+      <%= link_to 'ログアウト', destroy_user_session_path, data: {confirm: 'Are you sure?'}, method: :delete, class: 'btn btn-danger btn-block' %>
+    <% end %>
     <br>
-    <%= link_to 'ユーザー一覧', users_path, class: 'btn btn-primary btn-block' %>
   </div>
 </div>

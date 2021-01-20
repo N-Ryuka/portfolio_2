@@ -13,42 +13,25 @@
         <% end %>
         <br>
         <% @posts.each do |post| %>
-        <div class="card text-center">
-            <div class="card-header">
+        <div class="card">
+            <div class="card-body">
                 <% if post.user.image? %>
                     <a href="/users/<%= post.user.id %>"><img src=<%= post.user.image %> class = "icon_image" alt="ユーザーアイコン"></a>
+                    <%= post.user.username %>
+                    <span>さんが<%= post.created_at.to_s(:datetime_jp) %>に投稿</span>
                 <% else %>
                     <a href="/users/<%= post.user.id %>"><img src="/assets/default.png" class="icon_image" alt="ユーザーアイコン" %></a>
+                    <%= post.user.username %>
                 <% end %>
-                <%= post.user.username %>
-                <br>
+                <%= link_to post_path(post) do %>
+                    <h5 class="card-title text-dark"><%= post.title %></h5>
+                <% end %>
                 <% post.tags.each do |tag| %>
                     <span class="badge badge-primary"><%= tag.name %></span>
                 <% end %>
-            </div>
-            <div class="card-body">
-                <span>タイトル</span>
-                <h5 class="card-title"><%= post.title %></h5>
-                <hr>
-                <span>コンテント</span>
-                <p class="card-text"><%= post.body %></p>
-                <% if current_user %>
-                    <% if current_user.already_liked?(post) %>
-                        <%= link_to post_like_path(post, id: post.id), method: :delete do %>
-                            <i class="fa fa-heart fa-2x" aria-hidden="true"></i>
-                        <% end %>
-                    <% else %>
-                        <%= link_to post_likes_path(post), method: :post do %>
-                            <i class="fa fa-heart-o fa-2x" aria-hidden="true"></i>
-                        <% end %>
-                    <% end %>
-                <% end %>
-                <%= post.likes.count %>
                 <br>
-                <%= link_to '詳細', post_path(post), class: "btn btn-primary" %>
-            </div>
-            <div class="card-footer text-muted">
-                <%= post.created_at.to_s(:datetime_jp) %>に投稿されました
+                <%= fa_icon 'like', class: "fas fa-check fa-lg" %><%= post.likes.count %>
+                <%= fa_icon 'like', class: "far fa-comment-o fa-lg" %><%= post.comments.count %>
             </div>
         </div>
         <br>

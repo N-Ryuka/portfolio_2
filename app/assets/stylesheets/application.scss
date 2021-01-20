@@ -3,6 +3,8 @@
 @import "likes";
 @import "font-awesome-sprockets";
 @import "font-awesome";
+@import "notifications";
+@import "users";
 
 .container-login {
     @extend .container-fluid;
@@ -43,4 +45,33 @@
     //画像を丸くする
     object-fit: cover;
     //タテヨコ比を変えないままトリミング
+}
+
+.icon_image2 {
+    width: 75px;
+    height: 75px;
+    //サイズ指定
+    border-radius: 100px;
+    //画像を丸くする
+    object-fit: cover;
+    //タテヨコ比を変えないままトリミング
+}
+
+.image-size {
+    text-align: center;
+    margin: 0 auto;
+}
+
+
+.nav-account {
+    margin-left: 15px;
+}
+
+.nav-new {
+    margin-left: 15px;
+}
+
+.icon-edit {
+    text-align: center;
+    color: black;
 }

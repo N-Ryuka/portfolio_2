@@ -1,0 +1,15 @@
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <h3>いいねしている投稿</h3>
+        <% @user.liked_posts.each do |post| %>
+        <% if post.user.image? %>
+                <a href="/users/<%= post.user.id %>"><img src=<%= post.user.image %> class = "icon_image" alt="ユーザーアイコン"></a>
+            <% else %>
+                <a href="/users/<%= post.user.id %>"><img src="/assets/default.png" class="icon_image" alt="ユーザーアイコン" %></a>
+            <% end %>
+        <%= post.user.username %>: 
+        <a href="/posts/<%= post.id %>"><%= post.title %></a>
+        <hr>
+        <% end %>
+    </div>
+</div>

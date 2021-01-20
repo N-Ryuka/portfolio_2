@@ -1,6 +1,15 @@
-<h1>ユーザー一覧</h1>
-<% @users.each do |user| %>
-  <a href="/users/<%= user.id %>"><%= user.username %></a>
-  <hr>
-<% end %>
-<%= link_to "ホームへ戻る", posts_path %>
+<div class="row">
+  <div class="col-md-8 offset-2">
+    <h1>ユーザー一覧</h1>
+    <% @users.each do |user| %>
+      <% if user.image? %>
+        <a href="/users/<%= user.id %>"><img src=<%= user.image %> class = "icon_image" alt="ユーザーアイコン"></a>
+      <% else %>
+        <a href="/users/<%= user.id %>"><img src="/assets/default.png" class="icon_image" alt="ユーザーアイコン"></a>
+      <% end %>
+      <a href="/users/<%= user.id %>"><%= user.username %></a>
+      <hr>
+    <% end %>
+    <%= link_to "ホームへ戻る", posts_path, class: "btn btn-primary btn-block" %>
+  </div>
+</div>

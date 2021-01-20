@@ -1,21 +1,29 @@
-<% if @follower_user.image? %>
-    <a href="/users/<%= @follower_user.id %>"><img src=<%= @follower_user.image %> class = "icon_image" alt="ユーザーアイコン"></a>
-<% else %>
-    <a href="/users/<%= @follower_user.id %>"><img src="/assets/default.png" class="icon_image" alt="ユーザーアイコン" %></a>
-<% end %>
-<div class="justify-content">
-    <p><%= @follower_user.username %>'s Follower</p>
-</div>
-
-<% @users.each do |user| %>
-<div class="card">
-    <div class="card-body">
-        <% if user.image? %>
-            <a href="/users/<%= user.id %>"><img src=<%= user.image %> class = "icon_image" alt="ユーザーアイコン"></a>
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <% if @follower_user.image? %>
+            <div class="justify-content-center">
+                <a href="/users/<%= @follower_user.id %>"><img src=<%= @follower_user.image %> class = "icon_image" alt="ユーザーアイコン"></a>
+            </div>
         <% else %>
-            <a href="/users/<%= user.id %>"><img src="/assets/default.png" class="icon_image" alt="ユーザーアイコン" %></a>
+            <div class="justify-content-center">
+                <a href="/users/<%= @follower_user.id %>"><img src="/assets/default.png" class="icon_image justify-content-center" alt="ユーザーアイコン" %></a>
+            </div>
         <% end %>
-        <%= user.username %>
+        <div class="justify-content">
+            <p><%= @follower_user.username %>'s Follower</p>
+        </div>
+
+        <% @users.each do |user| %>
+        <div class="card">
+            <div class="card-body">
+                <% if user.image? %>
+                    <a href="/users/<%= user.id %>"><img src=<%= user.image %> class = "icon_image" alt="ユーザーアイコン"></a>
+                <% else %>
+                    <a href="/users/<%= user.id %>"><img src="/assets/default.png" class="icon_image" alt="ユーザーアイコン" %></a>
+                <% end %>
+                <%= user.username %>
+            </div>
+        </div>
+        <% end %>
     </div>
 </div>
-<% end %>

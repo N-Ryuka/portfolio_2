@@ -1,7 +1,16 @@
-<h2>いいねしたユーザー</h2>
-<hr>
-<% @post.liked_users.each do |user| %>
-    <a href="/users/<%= @post.user.id %>"><%= @post.user.username %></a>
-    <hr>
-<% end %>
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <h2>いいねしたユーザー</h2>
+        <hr>
+        <% @post.liked_users.each do |user| %>
+            <% if user.image? %>
+                <a href="/users/<%= user.id %>"><img src=<%= user.image %> class = "icon_image" alt="ユーザーアイコン"></a>
+            <% else %>
+                <a href="/users/<%= user.id %>"><img src="/assets/default.png" class="icon_image" alt="ユーザーアイコン" %></a>
+            <% end %>
+            <a href="/users/<%= user.id %>"><%= user.username %></a>
+            <hr>
+        <% end %>
+    </div>
+</div>
 
