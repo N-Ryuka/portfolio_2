@@ -25,12 +25,12 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= f.submit  t('.sign_in'), class: 'btn btn-primary  btn-block' %>
+  <div class="form-group text-center">
+    <%= f.submit  t('.sign_in'), class: 'btn btn-primary' %>
   </div>
 <% end %>
 
-<%= link_to 'ゲストユーザーとしてログイン', users_guest_sign_in_path, class: "btn btn-success btn-block", method: :post %>
+<%= link_to 'ゲストユーザーとしてログイン(閲覧用)', users_guest_sign_in_path, class: "btn btn-success btn-block", method: :post %>
 
 <%= render 'devise/shared/links' %>
 </div>

@@ -19,6 +19,13 @@ class User < ApplicationRecord
 
   mount_uploader :image, ImageUploader
 
+  def self.guest
+    find_or_create_by(email: 'guest@gmail.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.username = 'guest'
+    end
+  end
+
   def follow(other_user)
     unless self == other_user
       self.relationships.find_or_create_by(follow_id: other_user.id)

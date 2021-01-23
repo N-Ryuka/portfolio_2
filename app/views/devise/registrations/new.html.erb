@@ -34,6 +34,8 @@
   <div class="form-group">
     <%= f.submit t('.sign_up'), class: 'btn btn-primary btn-block' %>
   </div>
+
+  <%= link_to 'ゲストユーザーとしてログイン(閲覧用)', users_guest_sign_in_path, class: "btn btn-success btn-block", method: :post %>
 <% end %>
 
 <%= render 'devise/shared/links' %>
