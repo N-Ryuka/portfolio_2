@@ -60,21 +60,21 @@
 #     # password: "please use keys"
 #   }
 
-server "18.179.69.248", user: "rails_user", roles: %w{app db web}
+# server "18.179.69.248", user: "rails_user", roles: %w{app db web}
 
-set :ssh_options, {
-    keys: %w(~/.ssh/portfolio_2.pem),
-    forward_agent: true,
-    auth_methods: %w(publickey),
-}
+# set :ssh_options, {
+#     keys: %w(~/.ssh/portfolio_2.pem),
+#     forward_agent: true,
+#     auth_methods: %w(publickey),
+# }
 
 
-# server "18.179.69.248", 
-#     user: "app_user", 
-#     roles: %w{web db app},
-#     ssh_options: {
-#         user: 'app_user',
-#         keys: %w(~/.ssh/portfolio_2.pem),
-#         forward_agent: true,
-#         auth_methods: %w(publickey)
-#     }
+server "18.179.69.248", 
+    user: "app_user", 
+    roles: %w{web db app},
+    ssh_options: {
+        user: 'app_user',
+        keys: %w(~/.ssh/portfolio_2.pem),
+        forward_agent: true,
+        auth_methods: %w(publickey)
+    }
