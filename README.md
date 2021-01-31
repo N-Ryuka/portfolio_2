@@ -17,11 +17,7 @@
  ・ Postgresql 13.1<br>
  ・ Unicorn<br>
  ・ Nginx<br>
- ・ AWS<br>
-    ○ VPC <br>
-    ○ EC2<br>
-    ○ RDS<br>
-    ○ Route 53
+ ・ AWS(VPC EC2 RDS Route53)<br>
  ・ Docker / Docker-compose<br>
  ・ Git / Github<br>
  
